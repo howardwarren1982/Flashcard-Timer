@@ -1,42 +1,31 @@
-import { declareIndexPlugin, ReactRNPlugin, WidgetLocation } from '@remnote/plugin-sdk';
+import { declareIndexPlugin, ReactRNPlugin, WidgetLocation, AppEvents } from '@remnote/plugin-sdk';
 import '../style.css';
 import '../App.css';
 
 async function onActivate(plugin: ReactRNPlugin) {
   // Register settings
   await plugin.settings.registerStringSetting({
-    id: 'name',
-    title: 'What is your Name?',
-    defaultValue: 'Bob',
+    id: 'seconds',
+    title: 'How many seconds',
+    defaultValue: '30',
   });
 
-  await plugin.settings.registerBooleanSetting({
-    id: 'pizza',
-    title: 'Do you like pizza?',
-    defaultValue: true,
-  });
-
-  await plugin.settings.registerNumberSetting({
-    id: 'favorite-number',
-    title: 'What is your favorite number?',
-    defaultValue: 42,
-  });
-
-  // A command that inserts text into the editor if focused.
-  await plugin.app.registerCommand({
-    id: 'editor-command',
-    name: 'Editor Command',
-    action: async () => {
-      plugin.editor.insertPlainText('Hello World!');
-    },
-  });
-
-  // Show a toast notification to the user.
-  await plugin.app.toast("I'm a toast!");
-
-  // Register a sidebar widget.
+  // Register a  widget.
   await plugin.app.registerWidget('sample_widget', WidgetLocation.RightSidebar, {
     dimensions: { height: 'auto', width: '100%' },
+  });
+
+  plugin.event.addListener(AppEvents.URLChange, undefined, async ({ pathname }) => {
+    const url = await plugin.window.getURL();
+    if ((pathname as string).includes('/flashcards') || url.includes('/flashcards')) {
+      const floatingWidgetId = await plugin.window.openWidgetInRightSidebar('sample_widget', {});
+    }
+  });
+
+  plugin.event.addListener(AppEvents.RevealAnswer, undefined, async (data) => {
+    console.log('answer revealed');
+    console.log(data);
+    const floatingWidgetId = await plugin.window.openWidgetInRightSidebar('sample_widget', {});
   });
 }
 

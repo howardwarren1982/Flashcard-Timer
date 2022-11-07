@@ -1,21 +1,37 @@
 import { usePlugin, renderWidget, useTracker } from '@remnote/plugin-sdk';
+import { useState } from 'react';
+import CountdownTimer from '../components/CountdownTimer';
 
 export const SampleWidget = () => {
   const plugin = usePlugin();
+  const [isFlashCardOpen, setIsFlashCardOpen] = useState();
 
-  let name = useTracker(() => plugin.settings.getSetting<string>('name'));
-  let likesPizza = useTracker(() => plugin.settings.getSetting<boolean>('pizza'));
-  let favoriteNumber = useTracker(() => plugin.settings.getSetting<number>('favorite-number'));
+  let seconds: number = useTracker(() => plugin.settings.getSetting<string>('seconds'));
 
-  return (
-    <div className="p-2 m-2 rounded-lg rn-clr-background-light-positive rn-clr-content-positive">
-      <h1 className="text-xl">Sample Plugin</h1>
+  const THREE_DAYS_IN_MS: number = 1000 * seconds;
+  const NOW_IN_MS = new Date().getTime();
+
+  const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
+
+  const url = plugin.window.getURL().then((urlData) => {
+    setIsFlashCardOpen(urlData.includes('/flashcards'));
+  });
+
+  if (!isFlashCardOpen) {
+    return (
       <div>
-        Hi {name}, you {!!likesPizza ? 'do' : "don't"} like pizza and your favorite number is{' '}
-        {favoriteNumber}!
+        <h1>Flashcard Timer</h1>
+        <p>Open flashcard to start timer</p>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        <h1>Flashcard Timer</h1>
+        <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+      </div>
+    );
+  }
 };
 
 renderWidget(SampleWidget);
