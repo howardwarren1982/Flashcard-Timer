@@ -22,11 +22,11 @@ async function onActivate(plugin: ReactRNPlugin) {
     }
   });
 
-  plugin.event.addListener(AppEvents.RevealAnswer, undefined, async (data) => {
-    console.log('answer revealed');
-    console.log(data);
-    const floatingWidgetId = await plugin.window.openWidgetInRightSidebar('sample_widget', {});
-  });
+  // plugin.event.addListener(AppEvents.RevealAnswer, undefined, async (data) => {
+  //   console.log('answer revealed');
+  //   console.log(data);
+  //   const floatingWidgetId = await plugin.window.openWidgetInRightSidebar('sample_widget', {});
+  // });
 }
 
 async function onDeactivate(_: ReactRNPlugin) {}
