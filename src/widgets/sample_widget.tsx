@@ -4,6 +4,7 @@ import {
   useTracker,
   useAPIEventListener,
   AppEvents,
+  useRunAsync,
 } from '@remnote/plugin-sdk';
 import { useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
@@ -30,10 +31,6 @@ export const SampleWidget = () => {
     setQueueCardComplete(true);
   });
 
-  useAPIEventListener(AppEvents.QueueExit, undefined, async () => {
-    console.log('editor selc change');
-  });
-
   let seconds: string | undefined = useTracker(() => plugin.settings.getSetting<string>('seconds'));
 
   const THREE_DAYS_IN_MS: number = 1000 * Number(seconds);
@@ -44,8 +41,6 @@ export const SampleWidget = () => {
   const url = plugin.window.getURL().then((urlData) => {
     setIsFlashCardOpen(urlData.includes('/flashcards'));
   });
-
-  console.log(isQueueCardComplete);
 
   if (!isFlashCardOpen) {
     return (
