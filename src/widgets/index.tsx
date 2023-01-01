@@ -1,4 +1,10 @@
-import { declareIndexPlugin, ReactRNPlugin, WidgetLocation, AppEvents } from '@remnote/plugin-sdk';
+import {
+  declareIndexPlugin,
+  ReactRNPlugin,
+  WidgetLocation,
+  AppEvents,
+  RemId,
+} from '@remnote/plugin-sdk';
 import '../style.css';
 import '../App.css';
 
@@ -22,9 +28,15 @@ async function onActivate(plugin: ReactRNPlugin) {
     }
   });
 
-  plugin.event.addListener(AppEvents.QueueExit, undefined, () => {
-    console.log('queue exit');
-  });
+  //testing how to stop timer from showing
+
+  plugin.event.addListener(AppEvents.QueueExit, undefined, async () => {});
+
+  const allrems = await plugin.rem.getAll();
+  const findone = await plugin.card.getAll();
+
+  console.log(allrems[0]._id);
+  console.log(findone);
 }
 
 async function onDeactivate(_: ReactRNPlugin) {}

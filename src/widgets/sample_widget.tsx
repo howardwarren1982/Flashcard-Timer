@@ -4,22 +4,16 @@ import {
   useTracker,
   useAPIEventListener,
   AppEvents,
-  useRunAsync,
 } from '@remnote/plugin-sdk';
 import { useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
-
-// plugin.event.addListener(AppEvents.RevealAnswer, undefined, async (data) => {
-//   console.log('answer revealed');
-//   console.log(data);
-//   const floatingWidgetId = await plugin.window.openWidgetInRightSidebar('sample_widget', {});
-// });
 
 export const SampleWidget = () => {
   const plugin = usePlugin();
   const [isFlashCardOpen, setIsFlashCardOpen] = useState<boolean>();
   const [isAnswerReveal, setIsAnswerReveal] = useState<boolean>();
   const [isQueueCardComplete, setQueueCardComplete] = useState<boolean>();
+  // const [seenCards] = useSessionStorageState('seenCards', 0);
 
   useAPIEventListener(AppEvents.RevealAnswer, undefined, async () => {
     setIsAnswerReveal(true);
@@ -66,3 +60,5 @@ export const SampleWidget = () => {
 };
 
 renderWidget(SampleWidget);
+
+//queue__badge     rn-queue__card-counter
