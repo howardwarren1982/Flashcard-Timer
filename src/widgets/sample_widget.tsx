@@ -7,34 +7,17 @@ import {
 } from '@remnote/plugin-sdk';
 import { useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
+import useShowTimerLogic from '../hooks/useShowTimerLogic';
 
 export const SampleWidget = () => {
   const plugin = usePlugin();
-  const [isFlashCardOpen, setIsFlashCardOpen] = useState<boolean>();
-  const [isAnswerReveal, setIsAnswerReveal] = useState<boolean>();
-  // const [isQueueCard, setQueueCardComplete] = useState<boolean>();
-  const [isQueueCardLoaded, setQueueCardLoaded] = useState<boolean>(true);
-
-  useAPIEventListener(AppEvents.RevealAnswer, undefined, async () => {
-    setIsAnswerReveal(true);
-  });
-
-  useAPIEventListener(AppEvents.QueueCompleteCard, undefined, async () => {
-    setIsAnswerReveal(false);
-    setQueueCardLoaded(false);
-  });
-
-  useAPIEventListener(AppEvents.QueueLoadCard, undefined, async () => {
-    setQueueCardLoaded(true);
-  });
-
-  // useAPIEventListener(AppEvents.QueueEnter, undefined, async () => {
-  //   setQueueCardLoaded(true);
-  // });
-
-  // useAPIEventListener(AppEvents.QueueExit, undefined, async () => {
-  //   setQueueCardLoaded(true);
-  // });
+  const {
+    isFlashCardOpen,
+    isAnswerReveal,
+    isQueueCardLoaded,
+    setIsFlashCardOpen,
+    setQueueCardLoaded,
+  } = useShowTimerLogic();
 
   let seconds: string | undefined = useTracker(() => plugin.settings.getSetting<string>('seconds'));
 
@@ -43,7 +26,7 @@ export const SampleWidget = () => {
 
   const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
 
-  const url = plugin.window.getURL().then((urlData) => {
+  plugin.window.getURL().then((urlData) => {
     setIsFlashCardOpen(urlData.includes('/flashcards'));
   });
   if (isQueueCardLoaded) {
@@ -76,3 +59,28 @@ export const SampleWidget = () => {
 renderWidget(SampleWidget);
 
 //queue__badge     rn-queue__card-counter
+
+// const [isFlashCardOpen, setIsFlashCardOpen] = useState<boolean>();
+// const [isAnswerReveal, setIsAnswerReveal] = useState<boolean>();
+// const [isQueueCardLoaded, setQueueCardLoaded] = useState<boolean>(true);
+
+// useAPIEventListener(AppEvents.RevealAnswer, undefined, async () => {
+//   setIsAnswerReveal(true);
+// });
+
+// useAPIEventListener(AppEvents.QueueCompleteCard, undefined, async () => {
+//   setIsAnswerReveal(false);
+//   setQueueCardLoaded(false);
+// });
+
+// useAPIEventListener(AppEvents.QueueLoadCard, undefined, async () => {
+//   setQueueCardLoaded(true);
+// });
+
+// useAPIEventListener(AppEvents.QueueEnter, undefined, async () => {
+//   setQueueCardLoaded(true);
+// });
+
+// useAPIEventListener(AppEvents.QueueExit, undefined, async () => {
+//   setQueueCardLoaded(true);
+// });
