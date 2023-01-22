@@ -30,7 +30,9 @@ async function onActivate(plugin: ReactRNPlugin) {
 
   //testing how to stop timer from showing
 
-  plugin.event.addListener(AppEvents.QueueExit, undefined, async () => {});
+  // plugin.event.addListener(AppEvents., undefined, async () => {
+  //   console.log('new card loaded!');
+  // });
 
   const allrems = await plugin.rem.getAll();
   const findone = await plugin.card.getAll();

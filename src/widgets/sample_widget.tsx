@@ -12,18 +12,29 @@ export const SampleWidget = () => {
   const plugin = usePlugin();
   const [isFlashCardOpen, setIsFlashCardOpen] = useState<boolean>();
   const [isAnswerReveal, setIsAnswerReveal] = useState<boolean>();
-  const [isQueueCardComplete, setQueueCardComplete] = useState<boolean>();
-  // const [seenCards] = useSessionStorageState('seenCards', 0);
+  // const [isQueueCard, setQueueCardComplete] = useState<boolean>();
+  const [isQueueCardLoaded, setQueueCardLoaded] = useState<boolean>(true);
 
   useAPIEventListener(AppEvents.RevealAnswer, undefined, async () => {
     setIsAnswerReveal(true);
-    setQueueCardComplete(false);
   });
 
   useAPIEventListener(AppEvents.QueueCompleteCard, undefined, async () => {
     setIsAnswerReveal(false);
-    setQueueCardComplete(true);
+    setQueueCardLoaded(false);
   });
+
+  useAPIEventListener(AppEvents.QueueLoadCard, undefined, async () => {
+    setQueueCardLoaded(true);
+  });
+
+  // useAPIEventListener(AppEvents.QueueEnter, undefined, async () => {
+  //   setQueueCardLoaded(true);
+  // });
+
+  // useAPIEventListener(AppEvents.QueueExit, undefined, async () => {
+  //   setQueueCardLoaded(true);
+  // });
 
   let seconds: string | undefined = useTracker(() => plugin.settings.getSetting<string>('seconds'));
 
@@ -35,25 +46,28 @@ export const SampleWidget = () => {
   const url = plugin.window.getURL().then((urlData) => {
     setIsFlashCardOpen(urlData.includes('/flashcards'));
   });
-
-  if (!isFlashCardOpen) {
-    return (
-      <div>
-        <h1>Flashcard Timer</h1>
-        <p>Open flashcard to start timer</p>
-      </div>
-    );
-  } else if (isAnswerReveal) {
-    return (
-      <div>
-        <h1>Flashcard Timer will start on next card</h1>
-      </div>
-    );
+  if (isQueueCardLoaded) {
+    if (!isFlashCardOpen) {
+      return (
+        <div>
+          <h1>Flashcard Timer</h1>
+          <p>Open flashcard to start timer</p>
+        </div>
+      );
+    } else if (isAnswerReveal) {
+      setQueueCardLoaded(false);
+    } else {
+      return (
+        <div>
+          <h1>Flashcard Timer</h1>
+          <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+        </div>
+      );
+    }
   } else {
     return (
       <div>
-        <h1>Flashcard Timer</h1>
-        <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+        <h1>Waiting...</h1>
       </div>
     );
   }
