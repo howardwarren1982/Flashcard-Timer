@@ -1,7 +1,11 @@
-import React from 'react';
 import DateTimeDisplay from './DateTimeDisplay';
 
-export const ShowCounter = ({ minutes, seconds }) => {
+type Props = {
+  minutes: number;
+  seconds: number;
+};
+
+export const ShowCounter: React.FC<Props> = ({ minutes, seconds }) => {
   return (
     <div className="show-counter flex">
       <DateTimeDisplay value={minutes} type={''} isDanger={false} />

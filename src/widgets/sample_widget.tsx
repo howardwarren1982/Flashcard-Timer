@@ -1,15 +1,8 @@
-import {
-  usePlugin,
-  renderWidget,
-  useTracker,
-  useAPIEventListener,
-  AppEvents,
-} from '@remnote/plugin-sdk';
-import { useState } from 'react';
+import { usePlugin, renderWidget, useTracker } from '@remnote/plugin-sdk';
 import CountdownTimer from '../components/CountdownTimer';
 import useShowTimerLogic from '../hooks/useShowTimerLogic';
 
-export const SampleWidget = () => {
+export const SampleWidget: any = () => {
   const plugin = usePlugin();
   const {
     isFlashCardOpen,
@@ -57,30 +50,3 @@ export const SampleWidget = () => {
 };
 
 renderWidget(SampleWidget);
-
-//queue__badge     rn-queue__card-counter
-
-// const [isFlashCardOpen, setIsFlashCardOpen] = useState<boolean>();
-// const [isAnswerReveal, setIsAnswerReveal] = useState<boolean>();
-// const [isQueueCardLoaded, setQueueCardLoaded] = useState<boolean>(true);
-
-// useAPIEventListener(AppEvents.RevealAnswer, undefined, async () => {
-//   setIsAnswerReveal(true);
-// });
-
-// useAPIEventListener(AppEvents.QueueCompleteCard, undefined, async () => {
-//   setIsAnswerReveal(false);
-//   setQueueCardLoaded(false);
-// });
-
-// useAPIEventListener(AppEvents.QueueLoadCard, undefined, async () => {
-//   setQueueCardLoaded(true);
-// });
-
-// useAPIEventListener(AppEvents.QueueEnter, undefined, async () => {
-//   setQueueCardLoaded(true);
-// });
-
-// useAPIEventListener(AppEvents.QueueExit, undefined, async () => {
-//   setQueueCardLoaded(true);
-// });

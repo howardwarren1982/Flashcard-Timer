@@ -1,6 +1,10 @@
-import React from 'react';
+type Props = {
+  value: number;
+  type: string;
+  isDanger: boolean;
+};
 
-const DateTimeDisplay = ({ value, type, isDanger }) => {
+const DateTimeDisplay: React.FC<Props> = ({ value, type, isDanger }) => {
   return (
     <div className={isDanger ? 'countdown danger' : 'countdown'}>
       <p>{value}</p>

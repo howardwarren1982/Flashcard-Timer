@@ -1,10 +1,4 @@
-import {
-  declareIndexPlugin,
-  ReactRNPlugin,
-  WidgetLocation,
-  AppEvents,
-  RemId,
-} from '@remnote/plugin-sdk';
+import { declareIndexPlugin, ReactRNPlugin, WidgetLocation, AppEvents } from '@remnote/plugin-sdk';
 import '../style.css';
 import '../App.css';
 
@@ -24,15 +18,9 @@ async function onActivate(plugin: ReactRNPlugin) {
   plugin.event.addListener(AppEvents.URLChange, undefined, async ({ pathname }) => {
     const url = await plugin.window.getURL();
     if ((pathname as string).includes('/flashcards') || url.includes('/flashcards')) {
-      const floatingWidgetId = await plugin.window.openWidgetInRightSidebar('sample_widget', {});
+      await plugin.window.openWidgetInRightSidebar('sample_widget', {});
     }
   });
-
-  //testing how to stop timer from showing
-
-  // plugin.event.addListener(AppEvents., undefined, async () => {
-  //   console.log('new card loaded!');
-  // });
 
   const allrems = await plugin.rem.getAll();
   const findone = await plugin.card.getAll();

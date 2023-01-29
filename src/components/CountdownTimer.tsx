@@ -9,7 +9,11 @@ const ExpiredNotice = () => {
   );
 };
 
-const CountdownTimer = ({ targetDate }) => {
+type Props = {
+  targetDate: Number;
+};
+
+const CountdownTimer: React.FC<Props> = ({ targetDate }) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
 
   if (days + hours + minutes + seconds <= 0) {
