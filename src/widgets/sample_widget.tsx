@@ -14,10 +14,12 @@ export const SampleWidget: any = () => {
 
   let seconds: string | undefined = useTracker(() => plugin.settings.getSetting<string>('seconds'));
 
-  const THREE_DAYS_IN_MS: number = 1000 * Number(seconds);
+  //change the names of some of these variables
+
+  const SECONDS_IN_MS: number = 1000 * Number(seconds);
   const NOW_IN_MS = new Date().getTime();
 
-  const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
+  const targetDate = NOW_IN_MS + SECONDS_IN_MS;
 
   plugin.window.getURL().then((urlData) => {
     setIsFlashCardOpen(urlData.includes('/flashcards'));
@@ -26,7 +28,7 @@ export const SampleWidget: any = () => {
     if (!isFlashCardOpen) {
       return (
         <div>
-          <h1>Flashcard Timer</h1>
+          <h1 className="timer-heading">Flashcard Timer</h1>
           <p>Open flashcard to start timer</p>
         </div>
       );
@@ -35,8 +37,9 @@ export const SampleWidget: any = () => {
     } else {
       return (
         <div>
-          <h1>Flashcard Timer</h1>
-          <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+          <h1 className="timer-heading">Flashcard Timer</h1>
+          <div className="divider"></div>
+          <CountdownTimer targetDate={targetDate} />
         </div>
       );
     }
