@@ -1,12 +1,11 @@
 /* Add your plugin styles here. */
 .show-counter {
-  font-size: xx-large;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 90px;
-  text-align: center;
   color: #000000;
+  padding-left: 50px;
 }
 
 .timer-heading {
@@ -17,6 +16,15 @@
   text-align: center;
   margin-top: 26px;
   margin-bottom: 26px;
+  color: #000000;
+}
+
+.expired-notice, .sub-text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
   color: #000000;
 }
 

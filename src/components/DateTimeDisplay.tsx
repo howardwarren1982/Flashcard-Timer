@@ -7,7 +7,7 @@ type Props = {
 const DateTimeDisplay: React.FC<Props> = ({ value, type, isDanger }) => {
   return (
     <div className={isDanger ? 'countdown danger' : 'countdown'}>
-      <p>{value}</p>
+      <p className="time-value">{value}</p>
       <span>{type}</span>
     </div>
   );

@@ -29,7 +29,7 @@ export const SampleWidget: any = () => {
       return (
         <div>
           <h1 className="timer-heading">Flashcard Timer</h1>
-          <p>Open flashcard to start timer</p>
+          <p className="sub-text">Open flashcard to start timer</p>
         </div>
       );
     } else if (isAnswerReveal) {
@@ -46,7 +46,7 @@ export const SampleWidget: any = () => {
   } else {
     return (
       <div>
-        <h1>Waiting...</h1>
+        <h1 className="sub-text">Waiting...</h1>
       </div>
     );
   }
