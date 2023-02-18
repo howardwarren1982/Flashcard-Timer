@@ -19,7 +19,8 @@
   color: #000000;
 }
 
-.expired-notice, .sub-text {
+.expired-notice,
+.sub-text {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
@@ -35,4 +36,8 @@
   top: 103px;
   margin: 0 auto 45px auto;
   border: 1px solid #000000;
+}
+
+.counter-section {
+  margin-left: 4em;
 }

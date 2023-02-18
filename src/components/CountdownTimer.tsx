@@ -1,5 +1,6 @@
 import { useCountdown } from '../hooks/useCountdown';
 import { ShowCounter } from './ShowCounter';
+import Sound from './Sound';
 
 const ExpiredNotice = () => {
   return (

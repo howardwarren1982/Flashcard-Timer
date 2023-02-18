@@ -7,9 +7,11 @@ type Props = {
 
 export const ShowCounter: React.FC<Props> = ({ minutes, seconds }) => {
   return (
-    <div className="show-counter flex">
-      <DateTimeDisplay value={minutes} type={''} isDanger={false} />
-      :<DateTimeDisplay value={seconds} type={''} isDanger={false} />
+    <div className="counter-section">
+      <div className="show-counter flex">
+        <DateTimeDisplay value={minutes} type={''} isDanger={false} />
+        :<DateTimeDisplay value={seconds} type={''} isDanger={false} />
+      </div>
     </div>
   );
 };
