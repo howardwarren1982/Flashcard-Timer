@@ -1,4 +1,4 @@
-//in tesing
+//in testing
 
 import React from 'react';
 
