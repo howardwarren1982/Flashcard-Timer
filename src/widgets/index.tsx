@@ -11,7 +11,7 @@ async function onActivate(plugin: ReactRNPlugin) {
   });
 
   // Register a  widget.
-  await plugin.app.registerWidget('sample_widget', WidgetLocation.RightSidebar, {
+  await plugin.app.registerWidget('FlashcardTimer', WidgetLocation.RightSidebar, {
     dimensions: { height: 'auto', width: '100%' },
   });
 }

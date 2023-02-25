@@ -2,7 +2,7 @@ import { usePlugin, renderWidget, useTracker } from '@remnote/plugin-sdk';
 import CountdownTimer from '../components/CountdownTimer';
 import useShowTimerLogic from '../hooks/useShowTimerLogic';
 
-export const SampleWidget: any = () => {
+export const FlashcardTimer: any = () => {
   const plugin = usePlugin();
   const {
     isFlashCardOpen,
@@ -52,4 +52,4 @@ export const SampleWidget: any = () => {
   }
 };
 
-renderWidget(SampleWidget);
+renderWidget(FlashcardTimer);
