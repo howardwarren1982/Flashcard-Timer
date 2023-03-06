@@ -5,9 +5,9 @@
   "author": "Howard Warren",
   "repoUrl": "https://github.com/howardwarren1982/Flashcard-Timer.git",
   "version": {
-    "major": 0,
+    "major": 1,
     "minor": 0,
-    "patch": 1
+    "patch": 0
   },
   "theme": [],
   "enableOnMobile": false,

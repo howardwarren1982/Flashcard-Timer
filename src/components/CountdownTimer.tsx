@@ -3,7 +3,7 @@ import { ShowCounter } from './ShowCounter';
 
 const ExpiredNotice = () => {
   return (
-    <div className="expired-notice">
+    <div className="expired-notice text-2xl">
       <span>Expired!!!</span>
     </div>
   );

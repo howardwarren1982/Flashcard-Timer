@@ -28,8 +28,8 @@ export const FlashcardTimer: any = () => {
     if (!isFlashCardOpen) {
       return (
         <div>
-          <h1 className="timer-heading">Flashcard Timer</h1>
-          <p className="sub-text">Open flashcard to start timer</p>
+          <h1 className="timer-heading text-4xl mt-7 mb-7">Flashcard Timer</h1>
+          <p className="sub-text text-2xl">Open flashcards to start timer</p>
         </div>
       );
     } else if (isAnswerReveal) {
@@ -37,8 +37,8 @@ export const FlashcardTimer: any = () => {
     } else {
       return (
         <div>
-          <h1 className="timer-heading">Flashcard Timer</h1>
-          <div className="divider"></div>
+          <h1 className="timer-heading text-4xl mt-7 mb-7">Flashcard Timer</h1>
+          <div className="divider mb-11 mr-auto ml-auto w-72"></div>
           <CountdownTimer targetDate={targetDate} />
         </div>
       );
@@ -46,7 +46,7 @@ export const FlashcardTimer: any = () => {
   } else {
     return (
       <div>
-        <h1 className="sub-text">Waiting...</h1>
+        <h1 className="sub-text text-2xl">Waiting...</h1>
       </div>
     );
   }
