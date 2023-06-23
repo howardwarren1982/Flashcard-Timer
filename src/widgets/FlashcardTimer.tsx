@@ -38,7 +38,7 @@ export const FlashcardTimer: any = () => {
       return (
         <div>
           <h1 className="timer-heading text-4xl mt-7 mb-7">Flashcard Timer</h1>
-          <div className="divider mb-11 mr-auto ml-auto w-72"></div>
+          <div className="divider bg-black mb-11 h-1 w-80 mx-auto"></div>
           <CountdownTimer targetDate={targetDate} />
         </div>
       );
@@ -46,6 +46,8 @@ export const FlashcardTimer: any = () => {
   } else {
     return (
       <div>
+        <h1 className="timer-heading text-4xl mt-7 mb-7">Flashcard Timer</h1>
+        <div className="divider bg-black mb-11 h-1 w-80 mx-auto"></div>
         <h1 className="sub-text text-2xl">Waiting...</h1>
       </div>
     );
